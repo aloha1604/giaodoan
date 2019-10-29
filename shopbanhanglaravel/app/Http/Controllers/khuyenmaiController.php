@@ -84,23 +84,38 @@ class khuyenmaiController extends Controller
          $this->AuthLogin();
                 $this->AuthLogin();
         $data = array();
+        // $data['khuyenmai_name'] = $request->khuyenmai_name;
+        // $data['khuyenmai_maSP'] = $request->khuyenmai_maSP;
+        // $data['khuyenmai_giaSP'] = $request->khuyenmai_giaSP;
+        // $data['khuyenmai_giaKM'] = $request->khuyenmai_giaKM;
+        // $data['khuyenmai_hinhanhSP'] = $request->khuyenmai_hinhanhSP;
+        // $get_image = $request->file('khuyenmai_hinhanhSP');
+      
+        // if($get_image){
+        //     $get_name_image = $get_image->getClientOriginalName();
+        //     $name_image = current(explode('.',$get_name_image));
+        //     $new_image =  $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
+        //     $get_image->move('public/uploads/khuyenmai',$new_image);
+        //     $data['khuyenmai_hinhanhSP'] = $new_image;
+        //     DB::table('tbl_khuyenmai')->where('khuyenmai_id',$khuyenmai_id)->update($data);
+        //     Session::put('message','cap nhap phẩm thành công');
+        //     return Redirect::to('all-khuyenmai');
+        // }
+       
+        $id_SPKM = $request->khuyenmai_maSP;
+         
+        $prodict_all =  DB::table('tbl_product')->where('product_id',$id_SPKM)->get();
+           foreach($prodict_all as $key => $value){
+            $prodict_image = $value->product_image;
+        }
+        print_r($prodict_image);
+        
+      
         $data['khuyenmai_name'] = $request->khuyenmai_name;
         $data['khuyenmai_maSP'] = $request->khuyenmai_maSP;
         $data['khuyenmai_giaSP'] = $request->khuyenmai_giaSP;
         $data['khuyenmai_giaKM'] = $request->khuyenmai_giaKM;
-        $data['khuyenmai_hinhanhSP'] = $request->khuyenmai_hinhanhSP;
-        $get_image = $request->file('khuyenmai_hinhanhSP');
-      
-        if($get_image){
-            $get_name_image = $get_image->getClientOriginalName();
-            $name_image = current(explode('.',$get_name_image));
-            $new_image =  $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
-            $get_image->move('public/uploads/khuyenmai',$new_image);
-            $data['khuyenmai_hinhanhSP'] = $new_image;
-            DB::table('tbl_khuyenmai')->where('khuyenmai_id',$khuyenmai_id)->update($data);
-            Session::put('message','cap nhap phẩm thành công');
-            return Redirect::to('all-khuyenmai');
-        }
+        $data['khuyenmai_hinhanhSP'] = $prodict_image;
             
         DB::table('tbl_khuyenmai')->where('khuyenmai_id',$khuyenmai_id)->update($data);
         Session::put('message','Cập nhật sản phẩm thành công');

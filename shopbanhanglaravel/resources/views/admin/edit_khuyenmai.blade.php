@@ -19,7 +19,7 @@
                                 @foreach($edit_khuyenmai as $key => $km)
     
                                 <form role="form" action="{{URL::to('/update-khuyenmai/'.$km->khuyenmai_id)}}" method="post" enctype="multipart/form-data">
-                                    {{ csrf_field() }}
+                                    {{ csrf_field() }} 
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Tên sản phẩm</label>
                                     <input   type="text" name="khuyenmai_name" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục" value="{{$km->khuyenmai_name}}">
@@ -37,12 +37,12 @@
                                     <input type="text" name="khuyenmai_giaKM" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục" value="{{$km->khuyenmai_giaKM}}">
                                 </div>
                                 
-                                  <div class="form-group">
+                            <!--       <div class="form-group">
                                     <label for="exampleInputEmail1">Hình ảnh sản phẩm</label>
                                     <input type="file" name="khuyenmai_hinhanhSP" class="form-control" id="exampleInputEmail1"  >
                                       <img src="{{URL::to('public/uploads/khuyenmai/'.$km->khuyenmai_hinhanhSP)}}" height="100" width="100">
                                 </div>
-           
+            -->
                                 <button type="submit" name="add_khuyemai" class="btn btn-info">Cập nhật</button>
                                 </form>
                                 @endforeach
